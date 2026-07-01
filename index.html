@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>170kgデッドリフト記録</title>
+</head>
+<body>
+  <h1>🏋️ 170kgデッドリフト記録</h1>
+
+  <p>重量（kg）</p>
+  <input type="number" id="weight" placeholder="例:130">
+
+  <p>回数</p>
+  <input type="number" id="reps" placeholder="例:5">
+
+  <br><br>
+
+  <button onclick="calc()">1RMを計算</button>
+
+  <h2 id="result"></h2>
+
+  <script>
+    function calc() {
+      const weight = Number(document.getElementById("weight").value);
+      const reps = Number(document.getElementById("reps").value);
+
+      if (!weight || !reps) {
+        document.getElementById("result").textContent = "数値を入力してください";
+        return;
+      }
+
+      const oneRM = weight * (1 + reps / 30);
+      document.getElementById("result").textContent =
+        "推定1RM：" + oneRM.toFixed(1) + " kg";
+    }
+  </script>
+</body>
+</html>
