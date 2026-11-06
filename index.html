@@ -1,39 +1,52 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>170kgデッドリフト記録</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>180kgデッドリフト記録</title>
+<style>
+  body { font-family: sans-serif; margin: 24px auto; max-width: 640px; padding: 0 16px; color: #222; }
+  h1 { font-size: 24px; }
+  .bar { background: #e5e5e5; border-radius: 8px; height: 20px; overflow: hidden; }
+  .bar > div { background: #d33; height: 100%; width: 98%; }
+  label { display: block; margin-top: 12px; }
+  input { font-size: 16px; padding: 6px; width: 120px; }
+  button { font-size: 16px; padding: 6px 16px; margin-top: 12px; }
+  table { border-collapse: collapse; margin-top: 16px; width: 100%; }
+  th, td { border: 1px solid #ccc; padding: 6px 10px; text-align: left; }
+</style>
 </head>
 <body>
-  <h1>🏋️ 170kgデッドリフト記録</h1>
+<h1>180kgデッドリフト記録</h1>
+<p>目標：50歳の誕生日（2027年11月2日）までにデッドリフト180kgを1回引く。</p>
 
-  <p>重量（kg）</p>
-  <input type="number" id="weight" placeholder="例:130">
+<h2>現在地</h2>
+<p>ベスト：160kg × 3回（推定1RM 約176kg）／ 180kgまで約98%</p>
+<div class="bar"><div></div></div>
+<p>明日11/7（土）Day Bで160kg×4が引ければ、推定1RMは約181kgで180kgに届く計算。</p>
 
-  <p>回数</p>
-  <input type="number" id="reps" placeholder="例:5">
+<h2>推定1RM計算</h2>
+<label>重量（kg）<br><input type="number" id="w" value="160"></label>
+<label>回数<br><input type="number" id="r" value="3"></label>
+<button onclick="calc()">計算する</button>
+<p id="out"></p>
+<script>
+function calc() {
+  var w = parseFloat(document.getElementById('w').value);
+  var r = parseFloat(document.getElementById('r').value);
+  if (!w || !r) { document.getElementById('out').textContent = '重量と回数を入力してください'; return; }
+  var rm = w * (1 + r / 30); // Epley式
+  var rest = Math.max(0, 180 - rm);
+  document.getElementById('out').textContent =
+    '推定1RM：約' + rm.toFixed(0) + 'kg ／ 180kgまであと約' + rest.toFixed(0) + 'kg';
+}
+calc();
+</script>
 
-  <br><br>
-
-  <button onclick="calc()">1RMを計算</button>
-
-  <h2 id="result"></h2>
-
-  <script>
-    function calc() {
-      const weight = Number(document.getElementById("weight").value);
-      const reps = Number(document.getElementById("reps").value);
-
-      if (!weight || !reps) {
-        document.getElementById("result").textContent = "数値を入力してください";
-        return;
-      }
-
-      const oneRM = weight * (1 + reps / 30);
-      document.getElementById("result").textContent =
-        "推定1RM：" + oneRM.toFixed(1) + " kg";
-    }
-  </script>
+<h2>記録ログ</h2>
+<table>
+<tr><th>日付</th><th>記録</th><th>推定1RM</th></tr>
+<tr><td>2026-10-30</td><td>160kg × 3（起点）</td><td>約176kg</td></tr>
+</table>
 </body>
 </html>
